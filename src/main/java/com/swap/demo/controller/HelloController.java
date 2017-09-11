@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloController {
 
 	@RequestMapping(value="/getDiveSites/{country}",method=RequestMethod.GET,headers="Accept=application/json")
-	public @ResponseBody String getAllDiveSites(@PathVariable("country")String country){
-		
-		/*Map<String, List<String>> mapCountries = new HashMap<>();
+	public @ResponseBody List<String> getAllDiveSites(@PathVariable("country")String country){
+
+		Map<String, List<String>> mapCountries = new HashMap<>();
 		List<String> listIndia = Arrays.asList("Planet Scuba India","Scuba Evolution India","Dive Goa","Temple Adventures");	
 		mapCountries.put("India", listIndia);
 		List<String> listUsa = Arrays.asList("PADI Americas","Divers Direct","Scuba Works","US Scuba Center");	
@@ -28,7 +28,8 @@ public class HelloController {
 		
 		if(mapCountries.containsKey(country)){
 			return mapCountries.get(country);
-		}*/
-		return "Hello World";
+		}
+		return null;
+
 	}
 }
