@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloController {
 
 	@RequestMapping(value="/getDiveSites/{country}",method=RequestMethod.GET,headers="Accept=application/json")
-	public @ResponseBody List<String> getAllDiveSites(@PathVariable("country")String country){
-		
+	public @ResponseBody String getAllDiveSites(@PathVariable("country")String country){
+		/*
 		Map<String, List<String>> mapCountries = new HashMap<>();
 		List<String> listIndia = Arrays.asList("Planet Scuba India","Scuba Evolution India","Dive Goa","Temple Adventures");	
 		mapCountries.put("India", listIndia);
@@ -28,7 +28,7 @@ public class HelloController {
 		
 		if(mapCountries.containsKey(country)){
 			return mapCountries.get(country);
-		}
-		return null;
+		}*/
+		return "hello World";
 	}
 }
