@@ -3,6 +3,7 @@ package com.swap.demo.controller;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -30,8 +31,9 @@ public class HelloController {
 		mapCountries.put("CUBA", listSrilanka);
 		
 		JSONObject jsonObj = new JSONObject(country);
-		String key =jsonObj.getString("geo-country.original");
-		System.out.println(key);
+		JSONObject result=(JSONObject)jsonObj.get("result");
+		
+		String key=result.getString("resolvedQuery");
 		
 		if(mapCountries.containsKey(key)){
 			return new WebhookResponse("Dive Sites are ", mapCountries.get(key).toString());
