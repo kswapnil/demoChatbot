@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloController {
 
 	@RequestMapping(value="/getDiveSites",method=RequestMethod.POST)
-	public  @ResponseBody WebhookResponse getAllDiveSites(@RequestBody String country){
+	public  @ResponseBody WebhookResponse getAllDiveSites(@RequestBody String country) throws JSONException{
 
 		Map<String, List<String>> mapCountries = new HashMap<>();
 		List<String> listIndia = Arrays.asList("Planet Scuba India","Scuba Evolution India","Dive Goa","Temple Adventures");	
@@ -27,8 +29,12 @@ public class HelloController {
 		List<String> listSrilanka = Arrays.asList("Poseidon Diving Centre Mirissa","Pearl Divers PADI","Island Scuba","Submarine Diving");	
 		mapCountries.put("CUBA", listSrilanka);
 		
-		if(mapCountries.containsKey(country)){
-			return new WebhookResponse("Dive Sites are ", mapCountries.get(country).toString());
+		JSONObject jsonObj = new JSONObject(country);
+		String key =jsonObj.getString("geo-country.original");
+		System.out.println(key);
+		
+		if(mapCountries.containsKey(key)){
+			return new WebhookResponse("Dive Sites are ", mapCountries.get(key).toString());
 		}
 		return new WebhookResponse("Country not Found", "Country not Found");
 
