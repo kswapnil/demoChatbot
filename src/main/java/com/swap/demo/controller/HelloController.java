@@ -36,7 +36,7 @@ public class HelloController {
 		String key=result.getString("resolvedQuery");
 		
 		if(mapCountries.containsKey(key)){
-			return new WebhookResponse("Dive Sites are ", mapCountries.get(key).toString());
+			return new WebhookResponse(mapCountries.get(key).toString(), mapCountries.get(key).toString());
 		}
 		return new WebhookResponse("Country not Found", "Country not Found");
 
