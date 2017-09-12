@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HelloController {
 
-	@RequestMapping(value="/getDiveSites/{country}",method=RequestMethod.GET,headers="Accept=application/json")
-	public @ResponseBody List<String> getAllDiveSites(@PathVariable("country")String country){
+	@RequestMapping(value="/getDiveSites",method=RequestMethod.POST,headers="Accept=application/json")
+	public  @ResponseBody WebhookResponse getAllDiveSites(@RequestBody String country){
 
 		Map<String, List<String>> mapCountries = new HashMap<>();
 		List<String> listIndia = Arrays.asList("Planet Scuba India","Scuba Evolution India","Dive Goa","Temple Adventures");	
@@ -28,12 +28,12 @@ public class HelloController {
 		mapCountries.put("CUBA", listSrilanka);
 		
 		if(mapCountries.containsKey(country)){
-			return mapCountries.get(country);
+			return new WebhookResponse("Dive Sites are ", mapCountries.get(country).toString());
 		}
-		return null;
+		return new WebhookResponse("Country not Found", "Country not Found");
 
 	}
-	 @RequestMapping(value="/hello",method = RequestMethod.POST)
+	 @RequestMapping(value="/hello",method = RequestMethod.POST,headers="Accept=application/json")
 	    public @ResponseBody WebhookResponse webhook(@RequestBody String obj){
 
 	        System.out.println(obj);
